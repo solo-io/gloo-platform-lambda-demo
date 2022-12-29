@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   aws:
-    accountId: "931713665590"
-    region: us-east-2
+    accountId: "000000000000"
+    region: us-east-1
     lambda:
       invokeRoleName: gloo-lambda-executor

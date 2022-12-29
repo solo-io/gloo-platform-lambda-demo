@@ -14,10 +14,28 @@ Deploy the lambda to AWS:
 ./deploy/aws/deploy.sh
 ```
 
-Deploy Gloo Platform resources:
+Deploy Gloo Platform resources (edit overlays for your environment first!):
 
 ```bash
 kubectl apply -k ./deploy/kustomize/overlays/demo
+```
+
+Test the /lambda route:
+
+```bash
+curl 'http://****.amazonaws.com/lambda/echo?input=solo' -i
+
+HTTP/1.1 200 OK
+date: Thu, 29 Dec 2022 14:56:09 GMT
+content-type: application/json
+content-length: 57
+x-amzn-requestid: ****
+x-amzn-remapped-content-length: 0
+x-amz-executed-version: $LATEST
+x-envoy-upstream-service-time: 20
+server: istio-envoy
+ 
+solo
 ```
 
 ### Run Local
