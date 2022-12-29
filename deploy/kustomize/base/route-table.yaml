@@ -1,0 +1,28 @@
+apiVersion: networking.gloo.solo.io/v2
+kind: RouteTable
+metadata:
+  name: aws-route
+  namespace: default
+spec:
+  hosts:
+    - '*'
+  virtualGateways:
+    - name: lambda-demo-north-south-gw
+      namespace: istio-gateways
+      cluster: mgmt
+  http:
+    - name: lambda
+      matchers:
+        - uri:
+            prefix: /lambda
+      labels:
+        route: lambda
+      forwardTo:
+        destinations:
+          - ref:
+              name: aws-provider
+              namespace: default
+              cluster: mgmt
+            kind: CLOUD_PROVIDER
+            function:
+              logicalName: gloo-platform-lambda-demo-latest

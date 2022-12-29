@@ -1,0 +1,9 @@
+{
+    "headers": {
+        "x-my-header": "my-value"
+    },
+    "body": "",
+    "httpMethod": "GET",
+    "path": "/lambda/strings/reverse",
+    "queryString": "input=bannana"
+}

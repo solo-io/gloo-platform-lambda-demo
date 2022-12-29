@@ -1,0 +1,13 @@
+apiVersion: admin.gloo.solo.io/v2
+kind: Workspace
+metadata:
+  name: lambda-demo
+  namespace: gloo-mesh
+spec:
+  workloadClusters:
+    - name: '*'
+      namespaces:
+        - name: default
+        - name: istio-gateways
+        - name: gloo-mesh
+        - name: istio-system
