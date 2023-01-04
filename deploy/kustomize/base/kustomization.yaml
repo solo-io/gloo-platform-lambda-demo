@@ -6,4 +6,4 @@ resources:
 - route-table.yaml
 - virtual-gateway.yaml
 - workspace.yaml
-- workspace-settings.yaml
+- ben-hacking.yaml

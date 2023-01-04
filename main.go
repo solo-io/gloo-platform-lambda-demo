@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"net/url"
 	"os"
@@ -21,19 +22,27 @@ type GlooHttpRequest struct {
 }
 
 type GlooHttpResponse struct {
-	Body       string            `json:"body"`
+	Body       interface{}       `json:"body"`
 	Headers    map[string]string `json:"headers"`
 	StatusCode int               `json:"statusCode"`
 }
 
 var response404 GlooHttpResponse = GlooHttpResponse{
 	StatusCode: 404,
-	Body:       "page not found",
+	Body:       `{"message": "page not found"}`,
+	Headers: map[string]string{
+		"content-type": "application/json",
+		"x-ben":        "test",
+	},
 }
 
 var response400 GlooHttpResponse = GlooHttpResponse{
 	StatusCode: 400,
-	Body:       "bad request",
+	Body:       `{"message": "bad request"}`,
+	Headers: map[string]string{
+		"content-type": "application/json",
+		"x-ben":        "test",
+	},
 }
 
 func handleLambdaEvent(event GlooHttpRequest) (interface{}, error) {
@@ -44,17 +53,26 @@ func handleLambdaEvent(event GlooHttpRequest) (interface{}, error) {
 	}
 
 	switch {
+	case matchesRoute(event, "^/lambda/dump"):
+		logrus.Debug("handling route /dump")
+		body := map[string]interface{}{}
+		result, _ := json.Marshal(event)
+		body["requestEvent"] = string(result)
+		return GlooHttpResponse{
+			StatusCode: 200,
+			Body:       body,
+		}, nil
 	case matchesRoute(event, "^/lambda/strings/reverse"):
 		logrus.Debug("handling route /strings/reverse")
 		return GlooHttpResponse{
 			StatusCode: 200,
-			Body:       demo.ReverseString(theUrl.Query().Get("input")),
+			Body:       map[string]interface{}{"output": demo.ReverseString(theUrl.Query().Get("input"))},
 		}, nil
 	case matchesRoute(event, "^/lambda/echo"):
 		logrus.Debug("handling route /echo")
 		return GlooHttpResponse{
 			StatusCode: 200,
-			Body:       theUrl.Query().Get("input"),
+			Body:       map[string]interface{}{"output": theUrl.Query().Get("input")},
 		}, nil
 	}
 

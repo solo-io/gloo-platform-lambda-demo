@@ -1,3 +1,4 @@
+---
 apiVersion: admin.gloo.solo.io/v2
 kind: Workspace
 metadata:
@@ -11,3 +12,18 @@ spec:
         - name: istio-gateways
         - name: gloo-mesh
         - name: istio-system
+---
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: lambda-demo-settings
+  namespace: default
+spec:
+  exportTo:
+  - workspaces:
+    - name: "*"
+    # resources:
+    # - kind: SERVICE
+    #   namespace: default
+    # - kind: CLOUD_PROVIDERs
+    #   namespace: default

@@ -1,6 +1,0 @@
-apiVersion: admin.gloo.solo.io/v2
-kind: WorkspaceSettings
-metadata:
-  name: lambda-demo-settings
-  namespace: default
-spec: {}

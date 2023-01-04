@@ -1,0 +1,51 @@
+---
+apiVersion: admin.gloo.solo.io/v2
+kind: Workspace
+metadata:
+  name: ben-testing
+  namespace: gloo-mesh
+spec:
+  workloadClusters:
+    - name: '*'
+      namespaces:
+        - name: ben-testing
+---
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: ben-testing-settings
+  namespace: ben-testing
+spec:
+  importFrom:              
+  - workspaces:
+    - name: '*'
+---
+apiVersion: networking.gloo.solo.io/v2
+kind: RouteTable
+metadata:
+  name: ben-testing
+  namespace: ben-testing
+spec:
+  hosts:
+    - '*'
+  virtualGateways:
+    - name: lambda-demo-north-south-gw
+      namespace: istio-gateways
+      cluster: mgmt
+  http:
+    - name: ben
+      matchers:
+        - uri:
+            prefix: /ben
+      labels:
+        route: ben
+      forwardTo:
+        destinations:
+          - ref:
+              name: aws-provider
+              namespace: default
+              cluster: mgmt
+            kind: CLOUD_PROVIDER
+            function:
+              logicalName: gloo-platform-lambda-demo-latest
+    
