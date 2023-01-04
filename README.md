@@ -6,7 +6,7 @@ This repo contains AWS Lambda code and Gloo resources to demonstrate AWS Lambda 
 
 This demo produces the following configuration:
 
-TODO diagram
+![solution](./doc/solution.png)
 
 ## Requirements
 

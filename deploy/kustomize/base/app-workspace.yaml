@@ -22,5 +22,4 @@ spec:
     - name: 'gateway'
   exportTo:
   - workspaces:
-    - name: 'devops'
     - name: 'gateway'

@@ -18,7 +18,6 @@ metadata:
 spec:
   importFrom:              
   - workspaces:
-    - name: 'gateway'
     - name: 'app'
   exportTo:
   - workspaces:
