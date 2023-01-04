@@ -3,4 +3,4 @@ kind: Kustomization
 bases:
 - ../../base
 patchesStrategicMerge:
-- cloud-provider.yaml
+- devops-cloud-provider.yaml
