@@ -1,14 +1,24 @@
+### gloo-platform-lambda-demo
 
+This repo contains AWS Lambda code and Gloo resources to demonstrate AWS Lambda capability in Gloo Platform.
 
-### Requirements
+## Solution Overview
+
+This demo produces the following configuration:
+
+TODO diagram
+
+## Requirements
 
 * aws cli
 * go >= 1.18
 * jq
 
-### Deployment
+## Deployment
 
-Deploy the lambda to AWS:
+First, ensure your local AWS cli environment is healthy, then deploy the lambda to AWS:
+
+> the script does some brute-force crud operations; some error output is expected
 
 ```bash
 ./deploy/aws/deploy.sh
@@ -35,10 +45,13 @@ x-amz-executed-version: $LATEST
 x-envoy-upstream-service-time: 20
 server: istio-envoy
  
-solo
+{"output": "solo"}
 ```
+## Resource Description
 
-### Run Local
+TODO
+
+## Local Development
 
 Invoke the demo lambda locally by passing the `-event` param:
 
