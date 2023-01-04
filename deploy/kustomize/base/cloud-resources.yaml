@@ -2,7 +2,7 @@ apiVersion: networking.gloo.solo.io/v2
 kind: CloudResources
 metadata:
   name: aws-resources
-  namespace: default
+  namespace: devops
 spec:
   provider: aws-provider
   lambda:

@@ -3,7 +3,9 @@ kind: Kustomization
 resources:
 - cloud-provider.yaml
 - cloud-resources.yaml
-- route-table.yaml
 - virtual-gateway.yaml
-- workspace.yaml
-- ben-hacking.yaml
+- gateway-workspace.yaml
+- gateway-routetable.yaml
+- app-workspace.yaml
+- app-routetable.yaml
+- devops-workspace.yaml

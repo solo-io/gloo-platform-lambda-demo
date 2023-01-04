@@ -2,7 +2,7 @@ apiVersion: networking.gloo.solo.io/v2
 kind: CloudProvider
 metadata:
   name: aws-provider
-  namespace: default
+  namespace: devops
 spec:
   aws:
     stsEndpoint: sts.amazonaws.com

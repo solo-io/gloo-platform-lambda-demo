@@ -1,0 +1,26 @@
+---
+apiVersion: admin.gloo.solo.io/v2
+kind: Workspace
+metadata:
+  name: devops
+  namespace: gloo-mesh
+spec:
+  workloadClusters:
+    - name: '*'
+      namespaces:
+        - name: devops
+---
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: devops
+  namespace: devops
+spec:
+  importFrom:              
+  - workspaces:
+    - name: 'gateway'
+    - name: 'app'
+  exportTo:
+  - workspaces:
+    - name: 'gateway'
+    - name: 'app'

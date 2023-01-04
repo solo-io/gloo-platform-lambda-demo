@@ -2,8 +2,8 @@
 apiVersion: networking.gloo.solo.io/v2
 kind: RouteTable
 metadata:
-  name: aws-route
-  namespace: default
+  name: sanity
+  namespace: istio-gateways
 spec:
   hosts:
     - '*'
@@ -12,23 +12,26 @@ spec:
       namespace: istio-gateways
       cluster: mgmt
   http:
-    - name: lambda
+    - name: sanity
       matchers:
         - uri:
-            prefix: /lambda
+            prefix: /sanity
       labels:
-        route: lambda
-      forwardTo:
-        destinations:
-          - ref:
-              name: aws-provider
-              namespace: default
-              cluster: mgmt
-            kind: CLOUD_PROVIDER
-            function:
-              logicalName: gloo-platform-lambda-demo-latest
-              # awsLambda:
-              #   unwrapAsApiGateway: true
+        route: sanity
+      directResponse:
+        status: 200
+        body: "it's alive"
+      # forwardTo:
+      #   destinations:
+      #     - ref:
+      #         name: aws-provider
+      #         namespace: default
+      #         cluster: mgmt
+      #       kind: CLOUD_PROVIDER
+      #       function:
+      #         logicalName: gloo-platform-lambda-demo-latest
+      #         # awsLambda:
+      #         #   unwrapAsApiGateway: true
 # ---
 # apiVersion: trafficcontrol.policy.gloo.solo.io/v2
 # kind: TransformationPolicy
