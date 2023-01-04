@@ -8,8 +8,8 @@ spec:
     - http: {}
       port:
         number: 80
-  # workloads:
-  #   - selector:
-  #       cluster: mgmt
-  #       labels:
-  #         istio: ingressgateway
+  workloads:
+    - selector:
+        cluster: mgmt
+        labels:
+          istio: ingressgateway
