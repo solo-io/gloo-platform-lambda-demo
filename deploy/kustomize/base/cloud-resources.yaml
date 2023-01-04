@@ -9,9 +9,5 @@ spec:
     - logicalName: gloo-platform-lambda-demo-latest
       lambdaFunctionName: gloo-platform-lambda-demo
       qualifier: $LATEST
-    - logicalName: golang-apigw-latest
-      lambdaFunctionName: golang-apigw-latest
-      qualifier: $LATEST
-
 
     

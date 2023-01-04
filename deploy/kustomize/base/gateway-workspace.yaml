@@ -22,8 +22,3 @@ spec:
   exportTo:
   - workspaces:
     - name: "*"
-    # resources:
-    # - kind: SERVICE
-    #   namespace: default
-    # - kind: CLOUD_PROVIDERs
-    #   namespace: default
