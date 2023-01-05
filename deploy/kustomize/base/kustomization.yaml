@@ -9,3 +9,4 @@ resources:
 - app-workspace.yaml
 - app-routetable.yaml
 - devops-workspace.yaml
+- app-retrypolicy.yaml
