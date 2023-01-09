@@ -9,4 +9,4 @@ spec:
     accountId: "000000000000"
     region: us-west-1
     lambda:
-      invokeRoleName: gloo-platform-lambda-demo-invoke
+      invokeRoleName: gloo-lambda-executor

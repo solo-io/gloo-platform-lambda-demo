@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - devops-cloud-provider.yaml
 - devops-cloud-resources.yaml
-- virtual-gateway.yaml
+- gateway-virtual-gateway.yaml
 - gateway-workspace.yaml
 - gateway-routetable.yaml
 - app-workspace.yaml

@@ -4,26 +4,8 @@ metadata:
   name: app
   namespace: app
 spec:
-  hosts:
-    - '*'
-  virtualGateways:
-    - name: lambda-demo-north-south-gw
-      namespace: istio-gateways
-      cluster: "mgmt"
   http:
-    - name: app-sanity
-      matchers:
-        - uri:
-            prefix: /app-sanity
-      labels:
-        route: app-sanity
-      directResponse:
-        status: 200
-        body: "the app is alive"
     - name: lambda
-      matchers:
-        - uri:
-            prefix: /lambda
       labels:
         route: lambda
       forwardTo:

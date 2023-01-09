@@ -4,7 +4,13 @@ metadata:
   name: aws-resources
   namespace: devops
 spec:
+  # implies CP in same namespace; could end up deprecated some day
   provider: aws-provider
+  # we'll possibly introduce this in the future to enable different
+  # namespaces 
+  # providerRef:
+  #   name: 
+  #   namespace: 
   lambda:
     - logicalName: gloo-platform-lambda-demo-latest
       lambdaFunctionName: gloo-platform-lambda-demo
