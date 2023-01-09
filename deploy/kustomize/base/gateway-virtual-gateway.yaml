@@ -1,0 +1,27 @@
+apiVersion: networking.gloo.solo.io/v2
+kind: VirtualGateway
+metadata:
+  name: lambda-demo-north-south-gw
+  namespace: istio-gateways
+spec:
+  listeners:
+    - http: {}
+      port:
+        number: 80
+      # allowedRouteTables:
+      # - host: "*"
+      #   selector:
+      #     workspace: "app"
+      # allowedRoutes:
+      #   cloudProvider:
+      #     aws:
+      #       accountId:
+      #       - "000000000000"
+      #       - "111111111111"
+      #       # iamRoles:
+      #       # - gloo-lambda-executor
+  workloads:
+    - selector:
+        cluster: mgmt
+        labels:
+          istio: ingressgateway
