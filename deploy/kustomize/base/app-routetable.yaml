@@ -18,6 +18,6 @@ spec:
             kind: CLOUD_PROVIDER
             function:
               logicalName: gloo-platform-lambda-demo-latest
-              # awsLambda:
-              #   unwrapAsApiGateway: true
+              awsLambda:
+                unwrapAsApiGateway: true
     
