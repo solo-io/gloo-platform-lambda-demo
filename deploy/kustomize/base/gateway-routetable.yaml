@@ -2,7 +2,7 @@
 apiVersion: networking.gloo.solo.io/v2
 kind: RouteTable
 metadata:
-  name: sanity
+  name: gateway
   namespace: istio-gateways
 spec:
   hosts:

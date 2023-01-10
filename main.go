@@ -32,7 +32,7 @@ var response404 GlooHttpResponse = GlooHttpResponse{
 	Body:       `{"message": "page not found"}`,
 	Headers: map[string]string{
 		"content-type": "application/json",
-		"x-ben":        "test",
+		"x-solo":       "test",
 	},
 }
 
@@ -41,7 +41,7 @@ var response400 GlooHttpResponse = GlooHttpResponse{
 	Body:       `{"message": "bad request"}`,
 	Headers: map[string]string{
 		"content-type": "application/json",
-		"x-ben":        "test",
+		"x-solo":       "test",
 	},
 }
 
@@ -61,18 +61,45 @@ func handleLambdaEvent(event GlooHttpRequest) (interface{}, error) {
 		return GlooHttpResponse{
 			StatusCode: 200,
 			Body:       body,
+			Headers: map[string]string{
+				"x-solo": "test",
+			},
 		}, nil
 	case matchesRoute(event, "^/lambda/strings/reverse"):
 		logrus.Debug("handling route /strings/reverse")
 		return GlooHttpResponse{
 			StatusCode: 200,
 			Body:       map[string]interface{}{"output": demo.ReverseString(theUrl.Query().Get("input"))},
+			Headers: map[string]string{
+				"x-solo": "test",
+			},
+		}, nil
+	case matchesRoute(event, "^/lambda/string"):
+		logrus.Debug("handling route /lambda/string")
+		return GlooHttpResponse{
+			StatusCode: 200,
+			Body:       "example string response",
+			Headers: map[string]string{
+				"x-solo": "test",
+			},
 		}, nil
 	case matchesRoute(event, "^/lambda/echo"):
 		logrus.Debug("handling route /echo")
 		return GlooHttpResponse{
 			StatusCode: 200,
 			Body:       map[string]interface{}{"output": theUrl.Query().Get("input")},
+			Headers: map[string]string{
+				"x-solo": "test",
+			},
+		}, nil
+	case matchesRoute(event, "^/lambda/json"):
+		logrus.Debug("handling route /lambda/json")
+		return GlooHttpResponse{
+			StatusCode: 200,
+			Body:       map[string]interface{}{"output": "example JSON response"},
+			Headers: map[string]string{
+				"x-solo": "test",
+			},
 		}, nil
 	}
 
