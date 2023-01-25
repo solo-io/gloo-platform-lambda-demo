@@ -20,7 +20,7 @@ zip .build/lambda.zip .build/main
 
 set +euo pipefail
 
-aws iam create-role --role-name "${NAME}" --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}' || true
+aws iam create-role --role-name "${NAME}" --tags "Key=created-by,Value=benji_lilley" "Key=team,Value=product" "Key=purpose,Value=product-development" --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}' || true
 aws iam attach-role-policy --role-name "${NAME}" --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole || true
 
 aws lambda create-function \
@@ -29,6 +29,7 @@ aws lambda create-function \
     --zip-file "fileb://.build/lambda.zip" \
     --handler ".build/main" \
     --role "arn:aws:iam::${accountId}:role/${NAME}" \
+    --tags "created-by=benji_lilley,team=product,purpose=product-development" \
     || true
 
 aws lambda update-function-code \
