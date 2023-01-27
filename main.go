@@ -3,9 +3,11 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"net/url"
 	"os"
 	"regexp"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/sirupsen/logrus"
@@ -82,6 +84,17 @@ func handleLambdaEvent(event GlooHttpRequest) (interface{}, error) {
 			Headers: map[string]string{
 				"x-solo": "test",
 			},
+		}, nil
+	case matchesRoute(event, "^/lambda/headerlen"):
+		logrus.Debug("handling route /lambda/headerlen")
+		headers := map[string]string{}
+		for i := 1; i <= 50; i++ {
+			headers[fmt.Sprintf("x-solo-%d", i)] = strings.Repeat("x", i)
+		}
+		return GlooHttpResponse{
+			StatusCode: 200,
+			Body:       "sending headers of len 1-50",
+			Headers:    headers,
 		}, nil
 	case matchesRoute(event, "^/lambda/echo"):
 		logrus.Debug("handling route /echo")
